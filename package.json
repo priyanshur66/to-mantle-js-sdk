@@ -1,7 +1,7 @@
 {
-    "name": "test-api-02",
-    "version": "1.4.0",
-    "description": "test-api-02",
+    "name": "to-mantle-js-sdk",
+    "version": "0.0.1",
+    "description": "to-mantle-js-sdk",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -19,7 +19,7 @@
       "dist/config.d.ts",
       "dist/index.js",
       "dist/index.d.ts"
-    ],
+  ],
     "keywords": [],
     "author": "Your Name",
     "license": "ISC",

@@ -1,4 +1,4 @@
 declare const _default: {
-    readonly JSON_PLACEHOLDER_API_BASE_URL: "https://jsonplaceholder.typicode.com";
+    readonly API_BASE_URL: "https://orca-app-9ee3v.ondigitalocean.app";
 };
 export default _default;
