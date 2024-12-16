@@ -5,25 +5,18 @@ import { IContractCall, IChainContractCall, ITransactionResponse } from '../inte
 export default {
     executeMantleLogic: async (contractCall: IContractCall) => {
         return axios.post<ITransactionResponse>(
-            `${config.API_BASE_URL}/execute-contract`,
-            contractCall
-        );
-    },
-
-    executeChainLogic: async (contractCall: IChainContractCall) => {
-        return axios.post<ITransactionResponse>(
-            `${config.API_BASE_URL}/execute-chain-contract`,
+            `${config.MANTLE_LIT_SERVER_API_BASE_URL}/execute-contract`,
             contractCall
         );
     },
 
     testMantleContract: async () => {
         return axios.get<ITransactionResponse>(
-            `${config.API_BASE_URL}/test-contract`
+            `${config.MANTLE_LIT_SERVER_API_BASE_URL}/test-contract`
         );
     },
 
     checkHealth: async () => {
-        return axios.get(`${config.API_BASE_URL}/health`);
+        return axios.get(`${config.MANTLE_LIT_SERVER_API_BASE_URL}/health`);
     }
 };

@@ -1,4 +1,6 @@
 import mantle from './api/mantle';
+import yellowstone from './api/yellowstone';
+import baseSepoila from './api/baseSepoila';
 import { 
     IContractCall, 
     IChainContractCall,
@@ -10,9 +12,15 @@ import axios from 'axios';
 
 export class ToMantleSDK {
     private baseURL: string;
+    private yellowstoneURL: string;
+    private mantleURL: string;
 
-    constructor(baseURL?: string) {
-        this.baseURL = baseURL || config.API_BASE_URL;
+
+    constructor() {
+           
+        this.baseURL =  config.BASE_SEPOLIA_LIT_SERVER_API_BASE_URL;
+        this.mantleURL =  config.MANTLE_LIT_SERVER_API_BASE_URL;
+        this.yellowstoneURL = config.YELLOWSTONE_LIT_SERVER_API_BASE_URL;
     }
 
     /**
@@ -31,7 +39,7 @@ export class ToMantleSDK {
     /**
      * Execute the test contract
      */
-    async executeTestContract(): Promise<ITransactionResponse> {
+    async executeMantleTestContract(): Promise<ITransactionResponse> {
         try {
             const { data } = await mantle.testMantleContract();
             return data;
@@ -58,18 +66,14 @@ export class ToMantleSDK {
         }
     }
 
-    /**
-     * Execute a contract on any supported chain
+     /**
+     * Execute BseSepolia logic
      */
-    async executeChainLogic(
-        contractCall: IContractCall,
-        targetChain: SupportedChains
-    ): Promise<ITransactionResponse> {
+     async executeBaseSepoliaLogic(contractCall: IContractCall): Promise<ITransactionResponse> {
         try {
-            const { data } = await mantle.executeChainLogic({
+            const { data } = await baseSepoila.executeBaseSeopoliaLogic({
                 ...contractCall,
-                value: contractCall.value || '0',
-                targetChain
+                value: contractCall.value || '0'
             });
 
             return data;
@@ -78,6 +82,25 @@ export class ToMantleSDK {
             throw error;
         }
     }
+
+     /**
+     * Execute yellowstone logic
+     */
+     async executeYellowstoneLogic(contractCall: IContractCall): Promise<ITransactionResponse> {
+        try {
+            const { data } = await yellowstone.executeYellowstoneLogic({
+                ...contractCall,
+                value: contractCall.value || '0'
+            });
+
+            return data;
+        } catch (error) {
+            this.handleError(error);
+            throw error;
+        }
+    }
+
+ 
 
     private handleError(error: any): void {
         console.error('ToMantle SDK Error:', error);
