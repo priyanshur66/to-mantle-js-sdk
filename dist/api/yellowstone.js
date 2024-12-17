@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const config_1 = __importDefault(require("../config"));
 exports.default = {
-    executeMantleLogic: (contractCall) => __awaiter(void 0, void 0, void 0, function* () {
-        return axios_1.default.post(`${config_1.default.MANTLE_LIT_SERVER_API_BASE_URL}/execute-contract`, contractCall);
+    executeYellowstoneLogic: (contractCall) => __awaiter(void 0, void 0, void 0, function* () {
+        return axios_1.default.post(`${config_1.default.YELLOWSTONE_LIT_SERVER_API_BASE_URL}/execute-contract`, contractCall);
     }),
-    testMantleContract: () => __awaiter(void 0, void 0, void 0, function* () {
-        return axios_1.default.get(`${config_1.default.MANTLE_LIT_SERVER_API_BASE_URL}/test-contract`);
+    testYellowstoneContract: () => __awaiter(void 0, void 0, void 0, function* () {
+        return axios_1.default.get(`${config_1.default.YELLOWSTONE_LIT_SERVER_API_BASE_URL}/test-contract`);
     }),
-    checkHealth: () => __awaiter(void 0, void 0, void 0, function* () {
-        return axios_1.default.get(`${config_1.default.MANTLE_LIT_SERVER_API_BASE_URL}/health`);
+    checkYellowstoneHealth: () => __awaiter(void 0, void 0, void 0, function* () {
+        return axios_1.default.get(`${config_1.default.YELLOWSTONE_LIT_SERVER_API_BASE_URL}/health`);
     })
 };

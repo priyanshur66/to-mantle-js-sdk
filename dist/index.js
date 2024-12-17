@@ -14,11 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ToMantleSDK = void 0;
 const mantle_1 = __importDefault(require("./api/mantle"));
+const yellowstone_1 = __importDefault(require("./api/yellowstone"));
+const baseSepoila_1 = __importDefault(require("./api/baseSepoila"));
 const config_1 = __importDefault(require("./config"));
 const axios_1 = __importDefault(require("axios"));
 class ToMantleSDK {
-    constructor(baseURL) {
-        this.baseURL = baseURL || config_1.default.API_BASE_URL;
+    constructor() {
+        this.baseURL = config_1.default.BASE_SEPOLIA_LIT_SERVER_API_BASE_URL;
+        this.mantleURL = config_1.default.MANTLE_LIT_SERVER_API_BASE_URL;
+        this.yellowstoneURL = config_1.default.YELLOWSTONE_LIT_SERVER_API_BASE_URL;
     }
     /**
      * Check if the service is healthy
@@ -38,7 +42,7 @@ class ToMantleSDK {
     /**
      * Execute the test contract
      */
-    executeTestContract() {
+    executeMantleTestContract() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { data } = yield mantle_1.default.testMantleContract();
@@ -66,12 +70,27 @@ class ToMantleSDK {
         });
     }
     /**
-     * Execute a contract on any supported chain
-     */
-    executeChainLogic(contractCall, targetChain) {
+    * Execute BseSepolia logic
+    */
+    executeBaseSepoliaLogic(contractCall) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { data } = yield mantle_1.default.executeChainLogic(Object.assign(Object.assign({}, contractCall), { value: contractCall.value || '0', targetChain }));
+                const { data } = yield baseSepoila_1.default.executeBaseSeopoliaLogic(Object.assign(Object.assign({}, contractCall), { value: contractCall.value || '0' }));
+                return data;
+            }
+            catch (error) {
+                this.handleError(error);
+                throw error;
+            }
+        });
+    }
+    /**
+    * Execute yellowstone logic
+    */
+    executeYellowstoneLogic(contractCall) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { data } = yield yellowstone_1.default.executeYellowstoneLogic(Object.assign(Object.assign({}, contractCall), { value: contractCall.value || '0' }));
                 return data;
             }
             catch (error) {

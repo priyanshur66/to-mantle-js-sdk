@@ -20,4 +20,4 @@ export interface ITransactionResponse {
         chain?: string;
     };
 }
-export type SupportedChains = 'mantle' | 'ethereum' | 'base' | 'arbitrum' | 'optimism';
+export type SupportedChains = 'mantle' | 'baseSepolia' | 'yellostone';

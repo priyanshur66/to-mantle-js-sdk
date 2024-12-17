@@ -1,7 +1,9 @@
 import { IContractCall, IChainContractCall, ITransactionResponse, SupportedChains } from './interface';
 export declare class ToMantleSDK {
     private baseURL;
-    constructor(baseURL?: string);
+    private yellowstoneURL;
+    private mantleURL;
+    constructor();
     /**
      * Check if the service is healthy
      */
@@ -9,15 +11,19 @@ export declare class ToMantleSDK {
     /**
      * Execute the test contract
      */
-    executeTestContract(): Promise<ITransactionResponse>;
+    executeMantleTestContract(): Promise<ITransactionResponse>;
     /**
      * Execute mantle logic
      */
     executeMantleLogic(contractCall: IContractCall): Promise<ITransactionResponse>;
     /**
-     * Execute a contract on any supported chain
-     */
-    executeChainLogic(contractCall: IContractCall, targetChain: SupportedChains): Promise<ITransactionResponse>;
+    * Execute BseSepolia logic
+    */
+    executeBaseSepoliaLogic(contractCall: IContractCall): Promise<ITransactionResponse>;
+    /**
+    * Execute yellowstone logic
+    */
+    executeYellowstoneLogic(contractCall: IContractCall): Promise<ITransactionResponse>;
     private handleError;
 }
 export type { IContractCall, IChainContractCall, ITransactionResponse, SupportedChains };
